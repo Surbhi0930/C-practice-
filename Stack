@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define maxsize 5
+
+void push();
+void pop();
+void display();
+int stack [maxsize];
+int top=-1;
+
+void main(){
+int choice;
+printf("enter choice \n");
+scanf("%d",&choice);
+while(1){
+  printf("Static implementation of stack \n");
+  printf("\n----------------------------------");
+  printf("\n 1.push\n");
+  printf("\n 2.pop\n");
+  printf("\n 3. display\n");
+  printf("\n 4. Exit\n");
+  printf("Enter choice \n");
+  scanf("%d" ,&choice);
+  
+  switch(choice){
+   case 1: push();
+           break;
+   case 2: pop();
+           break;
+   case 3: display();
+           break;
+   case 4: exit(0);
+   default: printf("Invalid choice \n");
+   }
+  }
+ }
+ void push(){
+         int num;
+         if(top==maxsize-1){
+         printf("stack is full\n");
+         return;
+       }
+       printf("enter element to be pushed in stack\n");
+       scanf("%d",&num);
+       top=top+1;
+       stack[top]=num;
+    }
+    
+    void pop(){
+     int num;
+     if(top==-1){
+        printf("stack is empty\n");
+        return;
+        }
+     printf("Element of stack are \n");
+     printf("%d\n", stack[top]);
+     top=top-1;
+     for(int i=top; i>0;i--){
+           printf("stack[%d]: %d\n" , i, stack[i]);
+        }
+    }
+    void display(){
+         for(int i=0;i<top;i++){
+              printf("%d", stack[i]);
+           }
+           printf("\n");
+   }
+    
+      
+       
+

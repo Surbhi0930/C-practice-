@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define maxsize 100
+
+int stack[maxsize];
+int top=-1;
+
+void push(int data);
+int pop();
+int postfix(char *exp);
+
+int main(){
+printf("Enter postfix expression\n");
+char exp[maxsize]="234*6*+";
+
+int result=postfix(exp);
+
+printf("result of postfix evaluation %d\n",result);
+return 0;
+}
+void push(int data){
+   if(top==maxsize-1){
+      printf("Stack overflow\n");
+     
+      }
+      top=top+1;
+      stack[top]=data;
+      }
+        int pop(){
+  if(top==-1){
+     printf("stack underflow\n");
+     return -1;
+     
+    }
+    
+    return stack[top--];
+   }
+   
+   int postfix(char *exp){
+   int i=0,operand1 , operand2, result;
+   char ch;
+   
+   while((ch= exp[i++]) != '\0'){
+   if(isdigit(ch)){
+    push(ch - '0');
+    }
+    
+    else if(ch == '+' || ch == '-' || ch == '*' || ch == '/'){
+    
+    operand2 =pop();
+    operand1 =pop();
+    
+    switch(ch){
+      case '+':
+          result=operand1 + operand2;
+          break;
+      case '-':
+          result=operand1 - operand2;
+          break;
+      case '*':
+          result=operand1 * operand2;
+          break;
+      case '/':
+          result=operand1 / operand2;
+          break;
+      default:
+           printf("invalid operator\n");
+           exit(1);
+           }
+      
+      push(result);
+     }
+     else if(ch == ' '){
+        continue;
+        }
+        else{
+        
+        printf("invalid charcater expression: %c\n" ,ch);
+        exit(1);
+        }
+        }
+        return pop();
+        }
+          
+          
+          
+    

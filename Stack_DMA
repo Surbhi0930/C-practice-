@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int *stack;
+int top=-1;
+int maxsize;
+
+void push(int data);
+int pop();
+void display();
+void stackresize(int ns);
+
+int main(){
+int choice,data;
+
+printf("enter initial size of stack \n");
+scanf("%d" ,&maxsize);
+
+stack =(int*)malloc(maxsize * sizeof(int));
+
+if(stack==NULL){
+printf("Memory Allocation failed \n");
+return -1;
+}
+
+while(1){
+     printf("\n");
+     printf("1.push\n");
+     printf("2.pop\n");    
+     printf("3.display\n");
+     printf("4.exit\n");
+     printf("Enter your choice \n");
+     scanf("%d", &choice);
+     
+     switch(choice){
+        case 1:
+              printf("Enter the element to push into stack \n");
+              scanf("%d", &data);
+              push(data);
+              break;
+       case 2:
+              data=pop();
+              if(data!=-1){
+                   printf("Popped out data %d\n",data);
+                   }
+               break;
+        case 3:
+              display();
+              break;
+        case 4:
+              free(stack);
+              exit(0);
+              break;
+        default:
+                printf("Enter valid input \n");
+           }
+   }
+   return 0;
+   
+   }
+   
+   // push function
+   void push(int data){
+   if(top==maxsize-1){
+   printf("Stack overflow \n");
+   stackresize(maxsize*2);
+   }
+   top=top+1;
+   stack[top]=data;
+   
+   }
+   
+  // pop operation
+  int pop(){
+  if(top==-1){
+     printf("stack underflow\n");
+     return -1;
+     
+    }
+    int val=stack[top];
+    top=top-1;
+    return val;
+    }
+    // stack resize
+    void stackresize(int ns){
+    stack=(int*)realloc(stack,ns*sizeof(int));
+    if(stack==NULL){
+    printf("Memory allocation failure \n");
+    exit(1);
+    }
+    maxsize=ns;
+    }
+    
+    // display
+    void display(){
+      if(top==-1){
+      printf("stack is empty\n");
+      return;
+      }
+      printf("stack elements \n");
+      for(int i=top; i>=0; i--){
+      printf("%d\n" ,stack[i]);
+      }
+      }
+     
